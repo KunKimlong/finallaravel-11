@@ -1,19 +1,38 @@
 @extends('backend.master')
 @section('content')
 
+    @if (Session::has('success'))
+        <script>
+            Swal.fire({
+            title: "Done",
+            text: "Thumbnail Created",
+            icon: "success"
+            });
+        </script>
+    @endif
+
+    @if (Session::has('error'))
+        <script>
+            Swal.fire({
+            title: "Error",
+            text: "please choose thumbnail",
+            icon: "error"
+            });
+        </script>
+    @endif
+
     @section('site-title')
-        Admin | Add Post
+        Admin | Add Logo
     @endsection
     @section('page-main-title')
         Add Logo
     @endsection
-
     <!-- Content wrapper -->
     <div class="content-wrapper">
         <div class="container-xxl flex-grow-1 container-p-y">
             <div class="col-xl-12">
                 <!-- File input -->
-                <form action="/admin/add-logo-submit" method="post" enctype="multipart/form-data">
+                <form action="/addlogo" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="card">
                         <div class="card-body">
@@ -29,7 +48,6 @@
                         </div>
                     </div>
                 </form>
-
             </div>
         </div>
     </div>

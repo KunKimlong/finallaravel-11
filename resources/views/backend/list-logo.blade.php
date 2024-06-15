@@ -1,5 +1,18 @@
 @extends('backend.master')
 @section('content')
+
+
+@if (Session::has('success'))
+        <script>
+            Swal.fire({
+            title: "Done",
+            text: "Thumbnail Deleted",
+            icon: "success"
+            });
+        </script>
+    @endif
+
+
 <div class="content-wrapper">
     @section('site-title')
       Admin | List Post
@@ -15,19 +28,37 @@
               <thead>
                 <tr>
                   <th>Thumbnail</th>
-                  <th>Created At</th>
                   <th>Actions</th>
                 </tr>
               </thead>
               <tbody class="table-border-bottom-0">
-               
+                
+                
+                @forelse ($logos as $item)
+                <tr>
+                  <td><img src="{{url('uploads/'.$item->thumbnail)}}" width="120px" alt=""></td>
+                  <td>
+                    <div class="dropdown">
+                      <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                        <i class="bx bx-dots-vertical-rounded"></i>
+                      </button>
+                      <div class="dropdown-menu">
+                        <a class="dropdown-item" href="/openupdatelogo/{{$item->id}}"><i class="bx bx-edit-alt me-1"></i> Edit</a>
+                        <a class="dropdown-item" id="remove-post-key" data-value="{{$item->id}}" data-bs-toggle="modal" data-bs-target="#basicModal" href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                @empty
+                    <h1>Logo is empty</h1>
+                @endforelse
               </tbody>
             </table>
           </div>
         </div>
 
         <div class="mt-3">
-          <form action="/admin/delete-logo-submit" method="post">
+          <form action="/deleteLogo" method="post">
             @csrf
           <div class="modal fade" id="basicModal" tabindex="-1" style="display: none;" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -37,7 +68,7 @@
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-footer">
-                  <input type="hidden" id="remove-val" name="remove_id">
+                  <input type="text" id="remove-val" name="remove_id">
                   <button type="submit" class="btn btn-danger">Confirm</button>
                   <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
                 </div>
