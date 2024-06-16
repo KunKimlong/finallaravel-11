@@ -1,24 +1,23 @@
 @extends('backend.master')
 @section('content')
-
-
-@if (Session::has('success'))
-        <script>
-            Swal.fire({
-            title: "Done",
-            text: "Thumbnail Deleted",
-            icon: "success"
-            });
-        </script>
-    @endif
-
-
 <div class="content-wrapper">
+
+    @if (Session::has('success'))
+    {{-- Session::get('success') --}}
+    <script>
+        Swal.fire({
+        title: "Done",
+        text: "Category Deleted",
+        icon: "success"
+        });
+    </script>
+@endif
+
     @section('site-title')
       Admin | List Post
     @endsection
     @section('page-main-title')
-      List Logo
+      List Post
     @endsection
 
     <div class="container-xxl flex-grow-1 container-p-y">
@@ -27,30 +26,28 @@
             <table class="table">
               <thead>
                 <tr>
-                  <th>Thumbnail</th>
+                  <th>Name</th>
                   <th>Actions</th>
                 </tr>
               </thead>
               <tbody class="table-border-bottom-0">
-                
-                
-                @forelse ($logos as $item)
+                @forelse ($categories as $item)
                 <tr>
-                  <td><img src="{{url('uploads/'.$item->thumbnail)}}" width="120px" alt=""></td>
-                  <td>
-                    <div class="dropdown">
-                      <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                        <i class="bx bx-dots-vertical-rounded"></i>
-                      </button>
-                      <div class="dropdown-menu">
-                        <a class="dropdown-item" href="/openupdatelogo/{{$item->id}}"><i class="bx bx-edit-alt me-1"></i> Edit</a>
-                        <a class="dropdown-item" id="remove-post-key" data-value="{{$item->id}}" data-bs-toggle="modal" data-bs-target="#basicModal" href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a>
+                    <td>{{$item->name}}</td>
+                    <td>
+                      <div class="dropdown">
+                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                          <i class="bx bx-dots-vertical-rounded"></i>
+                        </button>
+                        <div class="dropdown-menu">
+                          <a class="dropdown-item" href="/openupdatecategory/{{$item->id}}"><i class="bx bx-edit-alt me-1"></i> Edit</a>
+                          <a class="dropdown-item" id="remove-post-key" data-value="{{$item->id}}" data-bs-toggle="modal" data-bs-target="#basicModal" href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a>
+                        </div>
                       </div>
-                    </div>
-                  </td>
-                </tr>
+                    </td>
+                  </tr>
                 @empty
-                    <h1>Logo is empty</h1>
+                    <h1>No category</h1>
                 @endforelse
               </tbody>
             </table>
@@ -58,7 +55,7 @@
         </div>
 
         <div class="mt-3">
-          <form action="/deleteLogo" method="post">
+          <form action="/deletecategory" method="post">
             @csrf
           <div class="modal fade" id="basicModal" tabindex="-1" style="display: none;" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -68,7 +65,7 @@
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-footer">
-                  <input type="text" id="remove-val"  name="remove_id">
+                  <input type="hidden" id="remove-val" name="remove_id">
                   <button type="submit" class="btn btn-danger">Confirm</button>
                   <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
                 </div>

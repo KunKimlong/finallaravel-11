@@ -180,12 +180,12 @@
 
               <ul class="menu-sub">
                 <li class="menu-item">
-                  <a href="/admin/list-category" class="menu-link">
+                  <a href="/getcategory" class="menu-link">
                     <div data-i18n="Without menu">View Post</div>
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="/admin/add-category" class="menu-link">
+                  <a href="/openaddcategory" class="menu-link">
                     <div data-i18n="Without menu">Add Post</div>
                   </a>
                 </li>
