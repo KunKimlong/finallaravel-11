@@ -32,7 +32,7 @@
         <div class="container-xxl flex-grow-1 container-p-y">
             <div class="col-xl-12">
                 <!-- File input -->
-                <form action="/addlogo" method="post" enctype="multipart/form-data">
+                <form action="{{route('addLogo')}}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="card">
                         <div class="card-body">

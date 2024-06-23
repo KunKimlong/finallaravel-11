@@ -31,9 +31,9 @@ class LogoController extends Controller
             Logo::create([
                 'thumbnail'=>$thumbnailName
             ]);
-            return redirect('/openaddlogo')->with('success','');
+            return redirect()->route('openaddLogo')->with('success','');
         }catch(Exception $e){
-            return redirect('/openaddlogo')->with('error','');
+            return redirect()->route('openaddLogo')->with('error','');
         }
     }
     public function openUpdate($id){
@@ -51,9 +51,9 @@ class LogoController extends Controller
             Logo::where('id',$id)->update([
                 'thumbnail'=>$thumbnailName
             ]);
-            return redirect('/openupdatelogo/'.$id)->with('success','');
+            return redirect()->route('openUpdateLogo',$id)->with('success','');
         }catch(Exception $e){
-            return redirect('/openupdatelogo/'.$id)->with('error','');
+            return redirect()->route('openUpdateLogo',$id)->with('error','');
         }
 
     }
@@ -62,7 +62,7 @@ class LogoController extends Controller
 
         Logo::where('id',$id)->delete();
 
-        return redirect('/getlogo')->with('success','');        
+        return redirect()->route("getLogo")->with('success','');        
         
     }
 }

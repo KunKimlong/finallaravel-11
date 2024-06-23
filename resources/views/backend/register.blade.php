@@ -4,13 +4,23 @@
 @endsection
 @section('content')
 
+@if (Session::has('error'))
+        <script>
+            Swal.fire({
+            title: "Error",
+            text: "please input all data",
+            icon: "error"
+            });
+        </script>
+    @endif
+
 <div class="container-xxl">
     <div class="authentication-wrapper authentication-basic container-p-y">
       <div class="authentication-inner">
         <!-- Register -->
         <div class="card">
           <div class="card-body">
-            <form id="formAuthentication" class="mb-3" action="/signup-submit" method="POST" enctype="multipart/form-data">
+            <form id="formAuthentication" class="mb-3" action="/register" method="POST" enctype="multipart/form-data">
               @csrf
               <div class="mb-3">
                 <label for="username" class="form-label">Username</label>
@@ -51,7 +61,7 @@
 
             <p class="text-center">
               <span>Already have an account?</span>
-              <a href="/signin">
+              <a href="/login">
                 <span>Sign in instead</span>
               </a>
             </p>

@@ -137,13 +137,13 @@
 
               <ul class="menu-sub">
                 <li class="menu-item">
-                  <a href="/getlogo" class="menu-link">
-                    <div data-i18n="Without menu">View Post</div>
+                  <a href="{{route("getLogo")}}" class="menu-link">
+                    <div data-i18n="Without menu">View Logo</div>
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="/openaddlogo" class="menu-link">
-                    <div data-i18n="Without menu">Add Post</div>
+                  <a href="{{route('openaddLogo')}}" class="menu-link">
+                    <div data-i18n="Without menu">Add Logo</div>
                   </a>
                 </li>
               </ul>
@@ -158,12 +158,12 @@
 
               <ul class="menu-sub">
                 <li class="menu-item">
-                  <a href="/admin/list-product" class="menu-link">
+                  <a href="{{route("viewPro")}}" class="menu-link">
                     <div data-i18n="Without menu">View Post</div>
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="/admin/add-product" class="menu-link">
+                  <a href="{{route('openAddPro')}}" class="menu-link">
                     <div data-i18n="Without menu">Add Post</div>
                   </a>
                 </li>
@@ -180,12 +180,12 @@
 
               <ul class="menu-sub">
                 <li class="menu-item">
-                  <a href="/getcategory" class="menu-link">
+                  <a href="{{route("viewCate")}}" class="menu-link">
                     <div data-i18n="Without menu">View Post</div>
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="/openaddcategory" class="menu-link">
+                  <a href="{{route('openAddCate')}}" class="menu-link">
                     <div data-i18n="Without menu">Add Post</div>
                   </a>
                 </li>
@@ -262,7 +262,7 @@
                 <li class="nav-item navbar-dropdown dropdown-user dropdown">
                   <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
-                      {{-- <img src="../uploads/{{ Auth::User()->profile }}" alt class="w-px-40 h-auto rounded-circle" /> --}}
+                      <img src="../uploads/{{ Auth::User()->profile }}" alt class="w-px-40 h-auto rounded-circle" />
                     </div>
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end">
@@ -271,11 +271,11 @@
                         <div class="d-flex">
                           <div class="flex-shrink-0 me-3">
                             <div class="avatar avatar-online">
-                              {{-- <img src="../uploads/{{ Auth::User()->profile }}" alt class="w-px-40 h-auto rounded-circle" /> --}}
+                              <img src="../uploads/{{ Auth::User()->profile }}" alt class="w-px-40 h-auto rounded-circle" />
                             </div>
                           </div>
                           <div class="flex-grow-1">
-                            {{-- <span class="fw-semibold d-block">{{ Auth::User()->name }}</span> --}}
+                            <span class="fw-semibold d-block">{{ Auth::User()->name }}</span>
                             <small class="text-muted">Admin</small>
                           </div>
                         </div>
@@ -285,10 +285,11 @@
                       <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="admin/signout">
+                      <form class="dropdown-item" action="/dashboard/logout" method="post">
+                        @csrf
                         <i class="bx bx-power-off me-2"></i>
-                        <span class="align-middle">Log Out</span>
-                      </a>
+                        <button class="align-middle btn">Log Out</button>
+                      </form>
                     </li>
                   </ul>
                 </li>

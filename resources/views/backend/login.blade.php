@@ -4,6 +4,16 @@
 @endsection
 @section('content')
 
+@if (Session::has('error'))
+<script>
+    Swal.fire({
+    title: "Error",
+    text: "Invalid username email or password",
+    icon: "error"
+    });
+</script>
+@endif
+
 <div class="container-xxl">
     <div class="authentication-wrapper authentication-basic container-p-y">
       <div class="authentication-inner">
@@ -11,7 +21,7 @@
         <div class="card">
           <div class="card-body">
             <!-- Logo -->
-            <form id="formAuthentication" class="mb-3" action="/signin-submit" method="POST">
+            <form id="formAuthentication" class="mb-3" action="/login" method="POST">
               @csrf
               <div class="mb-3">
                 <label for="email" class="form-label">Email or Username</label>
@@ -53,7 +63,7 @@
 
             <p class="text-center">
               <span>New on our platform?</span>
-              <a href="/signup">
+              <a href="/register">
                 <span>Create an account</span>
               </a>
             </p>

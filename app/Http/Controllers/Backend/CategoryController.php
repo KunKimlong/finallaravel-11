@@ -22,9 +22,9 @@ class CategoryController extends Controller
             Category::create([
                 'name'=>$name,
             ]);
-            return redirect('/openaddcategory')->with('success','');
+            return redirect()->route('openAddCate')->with('success','');
         }catch(Exception $e){
-            return redirect('/openaddcategory')->with('error','');
+            return redirect()->route('openAddCate')->with('error','');
         }
     }
     public function openUpdate($id){
@@ -48,6 +48,6 @@ class CategoryController extends Controller
 
         Category::where('id',$id)->delete();
 
-        return redirect('/getcategory')->with('success','');
+        return redirect()->route('viewCate')->with('success','');
     }
 }
