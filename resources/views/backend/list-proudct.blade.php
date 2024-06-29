@@ -1,5 +1,16 @@
 @extends('backend.master')
 @section('content')
+
+@if (Session::has('success'))
+<script>
+    Swal.fire({
+        title: "Done",
+        text: "Product Updated",
+        icon: "success"
+    });
+</script>
+@endif
+
 <div class="content-wrapper">
     @section('site-title')
       Admin | List Post
@@ -20,6 +31,7 @@
                   <th>Sale Price</th>
                   <th>Color</th>
                   <th>Size</th>
+                  <th>Category</th>
                   <th>Thumbnail</th>
                   <th>Author</th>
                   <th>Viewer</th>
@@ -36,10 +48,11 @@
                   <td>{{$item->sale_price}}</td>
                   <td>{{$item->color}}</td>
                   <td>{{$item->size}}</td>
+                  <td>{{$item->cate_name}}</td>
                   <td>
                        <img src="{{url('uploads/'.$item->thumbnail)}}" width="100px">
                   </td>
-                  <td>{{$item->author}}</td>
+                  <td>{{$item->username}}</td>
                   <td>{{$item->viewer}}</td>
                   <td>
                     <div class="dropdown">
@@ -47,8 +60,8 @@
                         <i class="bx bx-dots-vertical-rounded"></i>
                       </button>
                       <div class="dropdown-menu">
-                        <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-edit-alt me-1"></i> Edit</a>
-                        <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#basicModal" href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a>
+                        <a class="dropdown-item" href="{{route('openUpdatePro',$item->id)}}"><i class="bx bx-edit-alt me-1"></i> Edit</a>
+                        <a class="dropdown-item"  id="remove-post-key" data-value="{{$item->id}}" data-bs-toggle="modal" data-bs-target="#basicModal" href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a>
                       </div>
                     </div>
                   </td>
@@ -62,7 +75,8 @@
         </div>
 
         <div class="mt-3">
-          <form action="" method="post">
+          <form action="{{route('deletePro')}}" method="post">
+            @csrf
           <div class="modal fade" id="basicModal" tabindex="-1" style="display: none;" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
@@ -71,7 +85,7 @@
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-footer">
-                  <input type="hidden" id="remove-val" name="remove-id">
+                  <input type="hidden" id="remove-val" name="remove_id">
                   <button type="submit" class="btn btn-danger">Confirm</button>
                   <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
                 </div>
