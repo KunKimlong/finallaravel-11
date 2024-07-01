@@ -16,6 +16,7 @@ Route::controller(UserController::class)->group(function(){
 });
 
 Route::get('/',[HomeController::class,'index']);
+Route::get("/product/{id}",[HomeController::class,"productDetail"]);
 
 Route::middleware('auth')->group(function(){
 
@@ -33,7 +34,7 @@ Route::middleware('auth')->group(function(){
             Route::post('/updateLogo','updateLogo')->name('updateLogo');
             Route::post('/deleteLogo','deleteLogo')->name('deleteLogo');
         });
-        
+
         Route::controller(CategoryController::class)->group(function(){
             Route::get('/getcategory','viewCategory')->name('viewCate');
             Route::get('/openaddcategory','openAdd')->name('openAddCate');
@@ -42,8 +43,8 @@ Route::middleware('auth')->group(function(){
             Route::post('/updatecategory','updateCategory')->name('updateCate');
             Route::post('/deletecategory','deleteCategory')->name('deleteCAte');
         });
-        
-        
+
+
         Route::controller(ProductController::class)->group(function(){
             Route::get('/getproduct','viewProduct')->name('viewPro');
             Route::get('/addProduct','openAddProduct')->name('openAddPro');
@@ -51,7 +52,7 @@ Route::middleware('auth')->group(function(){
             Route::get('/openUpdateProduct/{id}','openUpdateProduct')->name('openUpdatePro');
             Route::post('/updateProduct','updateProduct')->name('updatePro');
             Route::post('/deleteProduct','deleteProduct')->name('deletePro');
-        }); 
+        });
     });
 });
 

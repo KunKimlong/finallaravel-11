@@ -4,7 +4,7 @@
     Home
 @endsection
 @section('content')
-    
+
 
 
 <main class="home">
@@ -22,24 +22,31 @@
                     <div class="col-3">
                         <figure>
                             <div class="thumbnail">
+                                @if ($item->sale_price != $item->regular_price)
                                 <div class="status">
                                     Promotion
                                 </div>
-                                <a href="">
+                                @endif
+                                <a href="/product/{{$item->id}}">
                                     <img src="{{url('uploads/'.$item->thumbnail)}}" width="450" height="500" alt="">
                                 </a>
                             </div>
                             <div class="detail">
                                 <div class="price-list">
-                                    <div class="price d-none">US {{$item->regular_price}}</div>
-                                    <div class="regular-price "><strike> US {{$item->regular_price}}</strike></div>
-                                    <div class="sale-price ">US {{$item->sale_price}}</div>
+                                    @if ($item->sale_price == $item->regular_price)
+                                    <div class="price">US {{$item->regular_price}}</div>
+                                    @else
+                                        <div class="regular-price"><strike> US {{$item->regular_price}}</strike></div>
+                                        <div class="sale-price">US {{$item->sale_price}}</div>
+                                    @endif
                                 </div>
                                 <h5 class="title">{{$item->name}}</h5>
                             </div>
                         </figure>
                     </div>
                 @endforeach
+
+
             </div>
         </div>
     </section>
@@ -61,24 +68,27 @@
                                 <div class="status">
                                     Promotion
                                 </div>
-                                <a href="">
+                                <a href="/product/{{$item->id}}">
                                     <img src="{{url('uploads/'.$item->thumbnail)}}" width="450" height="500" alt="">
                                 </a>
                             </div>
                             <div class="detail">
                                 <div class="price-list">
-                                    <div class="price d-none">US {{$item->regular_price}}</div>
-                                    <div class="regular-price "><strike> US {{$item->regular_price}}</strike></div>
-                                    <div class="sale-price ">US {{$item->sale_price}}</div>
+                                    @if ($item->sale_price == $item->regular_price)
+                                    <div class="price">US {{$item->regular_price}}</div>
+                                    @else
+                                        <div class="regular-price"><strike> US {{$item->regular_price}}</strike></div>
+                                        <div class="sale-price">US {{$item->sale_price}}</div>
+                                    @endif
                                 </div>
-                                <h5 class="title">T-Shirt 001</h5>
+                                <h5 class="title">{{$item->name}}</h5>
                             </div>
                         </figure>
                     </div>
                 @endforeach
             </div>
         </div>
-    </section>  
+    </section>
 
     <section>
         <div class="container">
@@ -94,20 +104,27 @@
                     <div class="col-3">
                         <figure>
                             <div class="thumbnail">
+                                @if ($item->sale_price != $item->regular_price)
                                 <div class="status">
                                     Promotion
                                 </div>
-                                <a href="">
+                                @endif
+                                <a href="/product/{{$item->id}}">
                                     <img src="{{url('uploads/'.$item->thumbnail)}}" width="450" height="500" alt="">
                                 </a>
                             </div>
                             <div class="detail">
-                                <div class="price-list">
-                                    <div class="price d-none">US {{$item->regular_price}}</div>
-                                    <div class="regular-price "><strike> US {{$item->regular_price}}</strike></div>
-                                    <div class="sale-price ">US {{$item->sale_price}}</div>
+                                <div class="detail">
+                                    <div class="price-list">
+                                        @if ($item->sale_price == $item->regular_price)
+                                            <div class="price">US {{$item->regular_price}}</div>
+                                        @else
+                                            <div class="regular-price"><strike> US {{$item->regular_price}}</strike></div>
+                                            <div class="sale-price">US {{$item->sale_price}}</div>
+                                        @endif
+                                    </div>
+                                    <h5 class="title">{{$item->name}}</h5>
                                 </div>
-                                <h5 class="title">T-Shirt 001</h5>
                             </div>
                         </figure>
                     </div>
@@ -116,5 +133,5 @@
         </div>
     </section>
 
-</main> 
+</main>
 @endsection
